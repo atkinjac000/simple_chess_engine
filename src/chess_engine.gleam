@@ -1,24 +1,42 @@
 import gleam/io
 import gleam/int
+import gleam/map.{Map}
 import gleam/bitwise
 
-type Bitboard {
-    Bitboard(board_state: Int)
+// A type to represent each piece to facilitate pattern matching.
+type PieceType {
+  WKing
+  WQueen
+  WRook
+  WKnight
+  WBishop
+  WPawn
+  BKing
+  BQueen
+  BRook
+  BKnight
+  BBishop
+  BPawn
 }
 
+// Associate a Bitboard to each piece type.
 type PieceInfo {
-  WKing,
-  WQueen,
-  WRook,
-  WKnight,
-  WBishop,
-  WPawn,
-  BKing,
-  BQueen,
-  BRook,
-  BKnight,
-  BBishop,
-  BPawn,
+  PieceInfo(current_pos: Bitboard)
+}
+
+type Bitboard = Int
+
+// Each position is a mapping from a Piece type to all the required info about
+// that piece.
+type Position = Map(PieceType, PieceInfo)
+
+// Coordinates on the board i.e. a1, b3 etc.
+type Coordinate = String
+
+// The tree that will be used to find the next best move.
+type  MoveTree {
+  Node(position: Position, children: List(Position), score: Float)  
+  Leaf
 }
 
 pub fn main() {

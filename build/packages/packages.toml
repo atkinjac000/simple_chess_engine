@@ -1,4 +1,0 @@
-[packages]
-gleam_stdlib = "0.25.0"
-gleeunit = "0.9.0"
-gleam_bitwise = "1.2.0"
